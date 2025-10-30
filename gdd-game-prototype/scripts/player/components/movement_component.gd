@@ -5,8 +5,8 @@ class_name MovementComponent extends Node
 # to move to the right and negative values to the left.
 func get_movement_direction() -> Vector2:
 	var direction = Vector2(
-		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 
 	if direction.length() > 1:
