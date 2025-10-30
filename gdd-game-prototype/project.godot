@@ -18,8 +18,10 @@ config/icon="res://icon.svg"
 [global_group]
 
 Exp="Experience shards"
+ennemies=""
 Pickup=""
 Player=""
+Zone=""
 
 [input]
 

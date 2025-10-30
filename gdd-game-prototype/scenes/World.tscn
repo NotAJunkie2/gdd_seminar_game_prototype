@@ -39,4 +39,4 @@ rotation = 1.5783997
 [node name="Exp" parent="." instance=ExtResource("2_32lhk")]
 position = Vector2(174, 133)
 
-[node name="Zone" parent="." instance=ExtResource("3_7g83o")]
+[node name="Zone" parent="." groups=["Zone"] instance=ExtResource("3_7g83o")]

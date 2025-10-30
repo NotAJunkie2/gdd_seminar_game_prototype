@@ -18,6 +18,10 @@ func _ready() -> void:
 		var players = get_tree().get_nodes_in_group("Player")
 		if players.size() > 0:
 			player = players[0]
+	
+	body_entered.connect(_on_body_entered)
+	contact_monitor = true
+	max_contacts_reported = 4
 
 
 func take_damage(value: float) -> void:

@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 
 @onready var zone_label: RichTextLabel = $HBoxContainer/ZoneLabel
@@ -9,14 +9,19 @@ var zone_node: Zone
 
 
 func _ready() -> void:
-	zone_node = get_tree().get_first_node_in_group("zone")
+	call_deferred("_setup_connections")
+
+
+func _setup_connections() -> void:
+	zone_node = get_tree().get_first_node_in_group("Zone")
 	if not zone_node:
 		zone_node = get_node_or_null("/root/World/Zone")
 	
 	if zone_node:
 		zone_node.current_zone.connect(_on_zone_changed)
 		zone_node.current_wave.connect(_on_wave_changed)
-		zone_node.spawner_manager.nb_of_ennemies.connect(_on_enemies_count_changed)
+		if zone_node.spawner_manager:
+			zone_node.spawner_manager.nb_of_ennemies.connect(_on_enemies_count_changed)
 		
 		_on_zone_changed(zone_node.CURRENT_ZONE)
 		_on_wave_changed(zone_node.CURRENT_WAVE)
