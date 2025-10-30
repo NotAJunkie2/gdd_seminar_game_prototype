@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bor4b2u8co588"]
+
+[ext_resource type="Script" uid="uid://cv6clw510lv3y" path="res://scripts/zones/zone.gd" id="1_44r8s"]
+[ext_resource type="Script" uid="uid://c6gg2r63halbx" path="res://scripts/zones/spawnerManager.gd" id="2_jetje"]
+
+[node name="Zone" type="Node2D"]
+script = ExtResource("1_44r8s")
+
+[node name="SpawnerManager" type="Node2D" parent="."]
+script = ExtResource("2_jetje")

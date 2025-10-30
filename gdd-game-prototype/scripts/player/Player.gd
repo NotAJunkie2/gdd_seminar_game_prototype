@@ -55,3 +55,10 @@ func _on_magnet_area_entered(area: Area2D) -> void:
 		(area as Pickup).FOLLOW_PLAYER = true
 		pass
 	pass # Replace with function body.
+
+
+func take_damage(value: float) -> void:
+	HEALTH -= value
+	if HEALTH <= 0:
+		print("death")
+	pass

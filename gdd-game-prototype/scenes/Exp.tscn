@@ -1,29 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://0swcjnwyle4j"]
+[gd_scene load_steps=2 format=3 uid="uid://0swcjnwyle4j"]
 
-[ext_resource type="Script" uid="uid://dmsbnm72l7l5e" path="res://scripts/world/Exp.gd" id="1_128i1"]
+[ext_resource type="Script" uid="uid://7tx43bhjgpxj" path="res://scripts/zones/ennemie.gd" id="1_128i1"]
 
-[sub_resource type="Gradient" id="Gradient_128i1"]
-offsets = PackedFloat32Array(0, 0.52, 1)
-colors = PackedColorArray(0, 0.9019608, 0, 1, 0.25575626, 0.616485, 0.04963132, 1, 0.8996458, 0.9384447, 0.16246757, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_t3rks"]
-gradient = SubResource("Gradient_128i1")
-width = 32
-height = 32
-fill = 2
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_128i1"]
-radius = 23.345236
-
-[node name="Exp" type="Area2D" groups=["Exp", "Pickup"]]
-rotation = 0.7891999
-collision_layer = 8
-collision_mask = 0
+[node name="Ennemie" type="RigidBody2D"]
+collision_layer = 2
+gravity_scale = 0.0
 script = ExtResource("1_128i1")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_t3rks")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_128i1")
+metadata/_custom_type_script = "uid://bwxq4qs87ygvt"
