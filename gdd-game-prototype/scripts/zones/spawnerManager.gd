@@ -65,6 +65,8 @@ func spawn_Enemy(current_zone_type) -> void:
 
 func EnemyCount() -> void:
 	EnemyCounter -= 1
+	if EnemyCounter < 0:
+		EnemyCounter = 0
 	nb_of_enemies.emit(EnemyCounter)
 	if isWaveEnded and EnemyCounter <= 0:
 		wave_ended.emit()

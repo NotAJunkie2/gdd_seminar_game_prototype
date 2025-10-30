@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://kjsf5inboxk5" path="res://scripts/player/components/movement_component.gd" id="2_mdl7e"]
 [ext_resource type="Script" uid="uid://db03088rjpiph" path="res://scripts/state_machine/states/Move.gd" id="5_qu4a1"]
 [ext_resource type="Script" path="res://scenes/Weapon.gd" id="6_70d11"]
-[ext_resource type="PackedScene" uid="uid://ko7w6c30dxaf" path="res://scenes/Enemies/Enemy_hud.tscn" id="6_cw2d6"]
+[ext_resource type="PackedScene" uid="uid://ko7w6c30dxaf" path="res://scenes/ennemies/ennemie_hud.tscn" id="6_cw2d6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 

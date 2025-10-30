@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var zone_label: RichTextLabel = $HBoxContainer/ZoneLabel
 @onready var wave_label: RichTextLabel = $HBoxContainer/WaveLabel
-@onready var ennemies_counter_label: RichTextLabel = $HBoxContainer/EnnemiesCounterLabel
+@onready var enemies_counter_label: RichTextLabel = $HBoxContainer/EnemiesCounterLabel
 
 
 var zone_node: Zone
@@ -11,7 +11,7 @@ var zone_node: Zone
 func _ready() -> void:
 	layer = 100
 	setup_label_style(zone_label)
-	setup_label_style(ennemies_counter_label)
+	setup_label_style(enemies_counter_label)
 	setup_label_style(wave_label)
 	
 	call_deferred("_setup_connections")
@@ -46,7 +46,7 @@ func _setup_connections() -> void:
 		print("HUD: Zone node not found!")
 		zone_label.text = "Zone: ERROR"
 		wave_label.text = "Wave: ERROR"
-		ennemies_counter_label.text = "Enemies: ERROR"
+		enemies_counter_label.text = "Enemies: ERROR"
 
 
 func _on_zone_changed(zone_number: int) -> void:
@@ -62,6 +62,6 @@ func _on_wave_changed(wave_number: int) -> void:
 
 
 func _on_enemies_count_changed(count: int) -> void:
-	if ennemies_counter_label:
-		ennemies_counter_label.text = "Enemies: " + str(count)
+	if enemies_counter_label:
+		enemies_counter_label.text = "Enemies: " + str(count)
 		print("HUD: Enemy count changed to ", count)

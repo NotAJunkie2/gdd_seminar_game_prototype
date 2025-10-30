@@ -6,7 +6,6 @@ class_name FastEnemy extends Enemy
 @export var Damage: float = 5.0
 @export var ExpValue: float = 30
 
-signal damaged(attack: Attack)
 
 func _ready() -> void:
 	super._ready()
@@ -21,8 +20,3 @@ func _physics_process(_delta: float) -> void:
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * SPEED
 		move_and_slide()
-
-func on_damaged(attack: Attack) -> void:
-	print("ATTACKED")
-	take_damage(attack.damage)
-	damaged.emit(attack)

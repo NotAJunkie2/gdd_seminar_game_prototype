@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://ko7w6c30dxaf"]
+
+[ext_resource type="Script" uid="uid://chw4ff6i4aekg" path="res://scripts/zones/ennemieHUD.gd" id="1_d2vh2"]
+
+[node name="EnemyHud" type="CanvasLayer"]
+script = ExtResource("1_d2vh2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ZoneLabel" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zone:"
+
+[node name="WaveLabel" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wave: 
+"
+
+[node name="EnemiesCounterLabel" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enemies: "
