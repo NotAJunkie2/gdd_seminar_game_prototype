@@ -1,9 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8jo8ory42qt7"]
+[gd_scene format=3 uid="uid://b8jo8ory42qt7"]
 
-[ext_resource type="Script" uid="uid://7tx43bhjgpxj" path="res://scripts/zones/ennemie.gd" id="1_bggy1"]
-
-[node name="Ennemie" type="RigidBody2D" groups=["ennemies"]]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 2
-gravity_scale = 0.0
-script = ExtResource("1_bggy1")
-metadata/_custom_type_script = "uid://7tx43bhjgpxj"

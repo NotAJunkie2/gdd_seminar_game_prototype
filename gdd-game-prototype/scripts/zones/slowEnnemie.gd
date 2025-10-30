@@ -1,4 +1,4 @@
-class_name SlowEnnemie extends Ennemie
+class_name SlowEnemy extends Enemy
 
 
 @export var Health: float = 20.0
@@ -6,6 +6,7 @@ class_name SlowEnnemie extends Ennemie
 @export var Damage: float = 15.0
 @export var ExpValue: float = 50
 
+signal damaged(attack: Attack)
 
 func _ready() -> void:
 	super._ready()
@@ -18,4 +19,10 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if player:
 		var direction = (player.global_position - global_position).normalized()
-		linear_velocity = direction * SPEED
+		velocity = direction * SPEED
+		move_and_slide()
+
+func on_damaged(attack: Attack) -> void:
+	print("ATTACKED")
+	take_damage(attack.damage)
+	damaged.emit(attack)

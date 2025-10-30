@@ -31,7 +31,7 @@ shape = SubResource("CircleShape2D_p1sfj")
 texture = SubResource("GradientTexture2D_51h0o")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 128
 collision_mask = 2
 script = ExtResource("1_hf8mt")
 

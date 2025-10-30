@@ -61,7 +61,7 @@ func manage_wave() -> void:
 	spawner_manager.isWaveEnded = false
 	var enemies_to_spawn = CURRENT_WAVE * 10
 	for i in range(enemies_to_spawn):
-		spawner_manager.spawn_ennemie(current_zone_type)
+		spawner_manager.spawn_Enemy(current_zone_type)
 	spawner_manager.isWaveEnded = true
 
 

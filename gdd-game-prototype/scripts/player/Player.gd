@@ -23,6 +23,7 @@ class_name Player extends CharacterBody2D
 @onready var ANIMATION_PLAYER: AnimationPlayer = $AnimationPlayer
 
 @export var aim_position : Vector2 = Vector2(1, 0)
+@onready var pickup_magnet: Area2D = $PickupMagnet
 
 func _init() -> void:
 	pass

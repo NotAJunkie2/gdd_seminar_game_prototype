@@ -1,18 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bq0kgdi8oy865"]
+[gd_scene load_steps=7 format=3 uid="uid://bq0kgdi8oy865"]
 
 [ext_resource type="PackedScene" uid="uid://b8jo8ory42qt7" path="res://scenes/ennemies/ennemie.tscn" id="1_rovlx"]
 [ext_resource type="Texture2D" uid="uid://brbg4d1lc3sms" path="res://assets/Port slime black.png" id="2_er5o7"]
 [ext_resource type="Script" uid="uid://bvxyrpwiksfsm" path="res://scripts/zones/slowEnnemie.gd" id="2_hb7rv"]
+[ext_resource type="Script" uid="uid://cwtyvtwadux0w" path="res://scripts/components/hitbox.gd" id="4_ug2c1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hb7rv"]
 radius = 40.0
 
-[node name="SlowEnnemie" instance=ExtResource("1_rovlx")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_t34rx"]
+radius = 37.01351
+
+[node name="SlowEnemy" instance=ExtResource("1_rovlx")]
+collision_mask = 129
 script = ExtResource("2_hb7rv")
-Health = 20.0
-Speed = 50.0
-Damage = 15.0
-ExpValue = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 scale = Vector2(1.1, 1.1)
@@ -20,3 +21,11 @@ texture = ExtResource("2_er5o7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_hb7rv")
+
+[node name="Hitbox" type="Area2D" parent="." index="2"]
+collision_layer = 2
+collision_mask = 129
+script = ExtResource("4_ug2c1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_t34rx")

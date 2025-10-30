@@ -1,9 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://0swcjnwyle4j"]
+[gd_scene load_steps=8 format=3 uid="uid://le0rcnvjmik7"]
 
-[ext_resource type="Script" uid="uid://7tx43bhjgpxj" path="res://scripts/zones/ennemie.gd" id="1_128i1"]
+[ext_resource type="Script" uid="uid://dmsbnm72l7l5e" path="res://scripts/world/Exp.gd" id="1_128i1"]
 
-[node name="Ennemie" type="RigidBody2D"]
-collision_layer = 2
-gravity_scale = 0.0
+[sub_resource type="Gradient" id="Gradient_128i1"]
+offsets = PackedFloat32Array(0, 0.52, 1)
+colors = PackedColorArray(0, 0.9019608, 0, 1, 0.25575626, 0.616485, 0.04963132, 1, 0.8996458, 0.9384447, 0.16246757, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t3rks"]
+gradient = SubResource("Gradient_128i1")
+width = 32
+height = 32
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_128i1"]
+radius = 23.345236
+
+[sub_resource type="SphereMesh" id="SphereMesh_128i1"]
+radial_segments = 4
+rings = 2
+
+[sub_resource type="Gradient" id="Gradient_t3rks"]
+offsets = PackedFloat32Array(0, 0.48666668, 0.7866667)
+colors = PackedColorArray(0.29803923, 0, 1, 1, 0.12123631, 0.5932203, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_orbks"]
+gradient = SubResource("Gradient_t3rks")
+fill = 2
+fill_from = Vector2(0.75233644, 0.4906542)
+fill_to = Vector2(0.20093457, 0.42523363)
+
+[node name="Exp" type="Area2D" groups=["Exp", "Pickup"]]
+rotation = 0.7891999
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_128i1")
-metadata/_custom_type_script = "uid://bwxq4qs87ygvt"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("GradientTexture2D_t3rks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_128i1")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+rotation = -0.7853982
+scale = Vector2(25.761, 41.458)
+mesh = SubResource("SphereMesh_128i1")
+texture = SubResource("GradientTexture2D_orbks")

@@ -37,8 +37,8 @@ func _setup_connections() -> void:
 		zone_node.current_zone.connect(_on_zone_changed)
 		zone_node.current_wave.connect(_on_wave_changed)
 		if zone_node.spawner_manager:
-			zone_node.spawner_manager.nb_of_ennemies.connect(_on_enemies_count_changed)
-			_on_enemies_count_changed(zone_node.spawner_manager.ennemieCounter)
+			zone_node.spawner_manager.nb_of_enemies.connect(_on_enemies_count_changed)
+			_on_enemies_count_changed(zone_node.spawner_manager.EnemyCounter)
 		
 		_on_zone_changed(zone_node.CURRENT_ZONE)
 		_on_wave_changed(zone_node.CURRENT_WAVE)

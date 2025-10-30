@@ -3,8 +3,8 @@ extends CharacterBody2D
 
 @export var hurtbox : Hurtbox
 
-@export var speed: float = 400
-@export var damage: float = 5.0
+@export var speed: float = 450
+@export var damage: float = 40
 @export var max_pierce: int = 1
 @export var range: float = 400
 
