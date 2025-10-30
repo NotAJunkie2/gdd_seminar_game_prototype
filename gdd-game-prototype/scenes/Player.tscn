@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0v6f1ikr2t1s"]
+[gd_scene load_steps=11 format=3 uid="uid://d0v6f1ikr2t1s"]
 
 [ext_resource type="Script" uid="uid://b4ppfp14eiqq6" path="res://scripts/player/Player.gd" id="1_3li8b"]
 [ext_resource type="Script" uid="uid://b6hwcxp17nnd" path="res://scripts/state_machine/StateMachine.gd" id="1_v6fml"]
@@ -9,13 +9,19 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 
 [sub_resource type="Gradient" id="Gradient_mdl7e"]
-offsets = PackedFloat32Array(0, 0.5933333)
+offsets = PackedFloat32Array(0.8333333, 1)
 colors = PackedColorArray(0, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qu4a1"]
 gradient = SubResource("Gradient_mdl7e")
-fill = 1
+fill = 2
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qu4a1"]
+radius = 81.02469
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70d11"]
+radius = 50.039986
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3li8b")
@@ -40,3 +46,22 @@ script = ExtResource("2_3li8b")
 
 [node name="Move" type="Node" parent="movement_fsm"]
 script = ExtResource("5_qu4a1")
+
+[node name="Magnet" type="Area2D" parent="."]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Magnet"]
+shape = SubResource("CircleShape2D_qu4a1")
+debug_color = Color(0.9358968, 1.915604e-05, 0.6365744, 0.41960785)
+
+[node name="Pickup" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+shape = SubResource("CircleShape2D_70d11")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="area_entered" from="Pickup" to="." method="_on_pickup_area_entered"]
+[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]

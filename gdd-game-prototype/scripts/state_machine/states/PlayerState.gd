@@ -37,6 +37,5 @@ func apply_movement(direction: Vector2) -> void:
 		PLAYER.velocity.y = 0.0
 	else:
 		var target_velocity: Vector2 = direction * PLAYER.MOVE_SPEED
-		print("APPLY MOVEMENT: ", target_velocity)
 		PLAYER.velocity.x = target_velocity.x
 		PLAYER.velocity.y = target_velocity.y

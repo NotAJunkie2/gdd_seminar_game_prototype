@@ -1,7 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://r06pogts8mq1"]
+[gd_scene load_steps=5 format=3 uid="uid://r06pogts8mq1"]
 
 [ext_resource type="PackedScene" uid="uid://d0v6f1ikr2t1s" path="res://scenes/Player.tscn" id="1_kqs1s"]
+[ext_resource type="PackedScene" uid="uid://0swcjnwyle4j" path="res://scenes/Exp.tscn" id="2_32lhk"]
+
+[sub_resource type="Gradient" id="Gradient_kqs1s"]
+offsets = PackedFloat32Array(0.96666664, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_32lhk"]
+gradient = SubResource("Gradient_kqs1s")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
 
 [node name="World" type="Node2D"]
 
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(563.00006, 339)
+scale = Vector2(44.843742, 27.512827)
+texture = SubResource("GradientTexture2D_32lhk")
+
 [node name="Player" parent="." instance=ExtResource("1_kqs1s")]
+top_level = true
+
+[node name="Exp4" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(-89, 258.99997)
+rotation = 0.030413419
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Exp3" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(-149.55154, 549.68787)
+rotation = -3.126386
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Exp2" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(202.1659, 350.19043)
+rotation = 1.5783997
+
+[node name="Exp" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(174, 133)
