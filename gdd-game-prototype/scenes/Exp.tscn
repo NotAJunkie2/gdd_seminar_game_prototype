@@ -16,7 +16,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_128i1"]
 radius = 23.345236
 
-[node name="Exp" type="Area2D" groups=["Exp"]]
+[node name="Exp" type="Area2D" groups=["Exp", "Pickup"]]
 rotation = 0.7891999
 collision_layer = 8
 collision_mask = 0

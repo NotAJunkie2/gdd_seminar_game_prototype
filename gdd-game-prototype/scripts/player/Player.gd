@@ -2,8 +2,9 @@ class_name Player extends CharacterBody2D
 
 # PLAYER
 @export var MOVE_SPEED: float = 250
-@export var MAX_HEALTH: float = 100
-@export var HEALTH: float = 100
+@export var MAX_HEALTH: int = 100
+@export var HEALTH: int = 100
+@export var SHIELD: int = 25
 # WEAPON STATS
 @export var DAMAGE_MULTIPLIER = 1.0
 @export var RANGE: float = 1.0
@@ -21,11 +22,17 @@ class_name Player extends CharacterBody2D
 @onready var MOVEMENT_CMP: MovementComponent = $movement_component
 @onready var ANIMATION_PLAYER: AnimationPlayer = $AnimationPlayer
 
+@export var aim_position : Vector2 = Vector2(1, 0)
+
 func _init() -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	MOVEMENT_FSM.process_input(event)
+	
+	if event is InputEventMouseMotion:
+		var half_viewport = get_viewport_rect().size / 2.0
+		aim_position = (event.position - half_viewport)
 
 func _physics_process(delta: float) -> void:
 	look_at(get_global_mouse_position())
@@ -37,8 +44,14 @@ func _process(delta: float) -> void:
 	MOVEMENT_FSM.process_frame(delta)
 
 func _on_pickup_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Exp"):
-		CURRENT_XP += (area as ExpDrop).EXPERIENCE_POINTS
-		area.queue_free()
+	if area.is_in_group("Pickup") and area is Pickup:
+		area.collect()
+		pass
+	pass # Replace with function body.
+
+
+func _on_magnet_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Pickup"):
+		(area as Pickup).FOLLOW_PLAYER = true
 		pass
 	pass # Replace with function body.

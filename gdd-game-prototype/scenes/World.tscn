@@ -26,15 +26,19 @@ top_level = true
 position = Vector2(-89, 258.99997)
 rotation = 0.030413419
 scale = Vector2(0.99999994, 0.99999994)
+EXPERIENCE_POINTS = 15.0
 
 [node name="Exp3" parent="." instance=ExtResource("2_32lhk")]
 position = Vector2(-149.55154, 549.68787)
 rotation = -3.126386
 scale = Vector2(0.99999994, 0.99999994)
+EXPERIENCE_POINTS = 20.0
 
 [node name="Exp2" parent="." instance=ExtResource("2_32lhk")]
 position = Vector2(202.1659, 350.19043)
 rotation = 1.5783997
+EXPERIENCE_POINTS = 30.0
 
 [node name="Exp" parent="." instance=ExtResource("2_32lhk")]
 position = Vector2(174, 133)
+EXPERIENCE_POINTS = 5.0

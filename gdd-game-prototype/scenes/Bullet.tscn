@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyqbi3irmtylj"]
+
+[ext_resource type="Script" uid="uid://dt1ryihsvnr1h" path="res://scripts/components/hurtbox.gd" id="1_hf8mt"]
+[ext_resource type="Script" uid="uid://buky3evrigqdf" path="res://scripts/objects/Bullet.gd" id="1_p1sfj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p1sfj"]
+radius = 10.049875
+
+[sub_resource type="Gradient" id="Gradient_4utqk"]
+offsets = PackedFloat32Array(0, 0.75333333)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_51h0o"]
+gradient = SubResource("Gradient_4utqk")
+width = 16
+height = 8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4m4t0"]
+radius = 12.0415945
+
+[node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox")]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("1_p1sfj")
+hurtbox = NodePath("Hurtbox")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p1sfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_51h0o")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_hf8mt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_4m4t0")

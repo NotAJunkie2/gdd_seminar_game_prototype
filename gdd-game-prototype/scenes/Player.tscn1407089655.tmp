@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0v6f1ikr2t1s"]
+[gd_scene load_steps=11 format=3 uid="uid://d0v6f1ikr2t1s"]
 
 [ext_resource type="Script" uid="uid://b4ppfp14eiqq6" path="res://scripts/player/Player.gd" id="1_3li8b"]
 [ext_resource type="Script" uid="uid://b6hwcxp17nnd" path="res://scripts/state_machine/StateMachine.gd" id="1_v6fml"]
 [ext_resource type="Script" uid="uid://b1gbueiph48t1" path="res://scripts/state_machine/states/idle.gd" id="2_3li8b"]
 [ext_resource type="Script" uid="uid://kjsf5inboxk5" path="res://scripts/player/components/movement_component.gd" id="2_mdl7e"]
 [ext_resource type="Script" uid="uid://db03088rjpiph" path="res://scripts/state_machine/states/Move.gd" id="5_qu4a1"]
-[ext_resource type="Script" uid="uid://b61deo0lm2l6w" path="res://scenes/Weapon.gd" id="6_70d11"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 
@@ -23,14 +22,6 @@ radius = 81.02469
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70d11"]
 radius = 50.039986
-
-[sub_resource type="PrismMesh" id="PrismMesh_qu4a1"]
-
-[sub_resource type="Gradient" id="Gradient_70d11"]
-colors = PackedColorArray(0.5875964, 0.21628591, 0.36392477, 1, 1, 0.3019608, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_cw2d6"]
-gradient = SubResource("Gradient_70d11")
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_3li8b")
@@ -56,42 +47,22 @@ script = ExtResource("2_3li8b")
 [node name="Move" type="Node" parent="movement_fsm"]
 script = ExtResource("5_qu4a1")
 
-[node name="PickupMagnet" type="Area2D" parent="."]
+[node name="Magnet" type="Area2D" parent="."]
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupMagnet"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Magnet"]
 shape = SubResource("CircleShape2D_qu4a1")
 debug_color = Color(0.9358968, 1.915604e-05, 0.6365744, 0.41960785)
 
-[node name="PickupZone" type="Area2D" parent="."]
+[node name="Pickup" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
 shape = SubResource("CircleShape2D_70d11")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("FIRING_POSITION")]
-position = Vector2(28, -12)
-script = ExtResource("6_70d11")
-FIRING_POSITION = NodePath("Marker2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Weapon"]
-position = Vector2(-7.000002, 41.000004)
-rotation = -1.5707964
-scale = Vector2(30, 30)
-mesh = SubResource("PrismMesh_qu4a1")
-texture = SubResource("GradientTexture2D_cw2d6")
-
-[node name="Marker2D" type="Marker2D" parent="Weapon"]
-position = Vector2(6, 41)
-
-[node name="Cooldown" type="Timer" parent="Weapon"]
-
-[connection signal="area_entered" from="PickupMagnet" to="." method="_on_magnet_area_entered"]
-[connection signal="area_entered" from="PickupZone" to="." method="_on_pickup_area_entered"]
-[connection signal="body_entered" from="PickupZone" to="." method="_on_pickup_body_entered"]
-[connection signal="timeout" from="Weapon/Cooldown" to="Weapon" method="_on_cooldown_timeout"]
+[connection signal="area_entered" from="Magnet" to="." method="_on_magnet_area_entered"]
+[connection signal="area_entered" from="Pickup" to="." method="_on_pickup_area_entered"]
+[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
