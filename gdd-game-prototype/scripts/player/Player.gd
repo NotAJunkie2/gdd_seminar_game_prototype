@@ -34,8 +34,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		return
 	MOVEMENT_FSM.process_frame(delta)
 
 func _on_pickup_area_entered(area: Area2D) -> void:

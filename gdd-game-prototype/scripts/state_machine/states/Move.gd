@@ -8,12 +8,13 @@ func exit() -> void:
 
 func process_frame(delta: float) -> void:
 	super(delta)
+	
+	if PLAYER.velocity.length() < 0.01:
+		transition.emit("Idle")
 	pass
 
 func process_physics(delta: float) -> void:
 	super(delta)
-	if PLAYER.velocity.length() < 0.01:
-		transition.emit("Idle")
 	pass
 
 func process_input(event: InputEvent) -> void:
