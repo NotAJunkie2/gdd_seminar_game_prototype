@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0v6f1ikr2t1s"]
+
+[ext_resource type="Script" uid="uid://b4ppfp14eiqq6" path="res://scripts/player/Player.gd" id="1_3li8b"]
+[ext_resource type="Script" uid="uid://b6hwcxp17nnd" path="res://scripts/state_machine/StateMachine.gd" id="1_v6fml"]
+[ext_resource type="Script" uid="uid://b1gbueiph48t1" path="res://scripts/state_machine/states/idle.gd" id="2_3li8b"]
+[ext_resource type="Script" uid="uid://kjsf5inboxk5" path="res://scripts/player/components/movement_component.gd" id="2_mdl7e"]
+[ext_resource type="Script" uid="uid://db03088rjpiph" path="res://scripts/state_machine/states/Move.gd" id="5_qu4a1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
+
+[sub_resource type="Gradient" id="Gradient_mdl7e"]
+offsets = PackedFloat32Array(0, 0.5933333)
+colors = PackedColorArray(0, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qu4a1"]
+gradient = SubResource("Gradient_mdl7e")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_3li8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5q5h1")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_qu4a1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="movement_component" type="Node" parent="."]
+script = ExtResource("2_mdl7e")
+
+[node name="movement_fsm" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
+script = ExtResource("1_v6fml")
+CURRENT_STATE = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="movement_fsm"]
+script = ExtResource("2_3li8b")
+
+[node name="Move" type="Node" parent="movement_fsm"]
+script = ExtResource("5_qu4a1")
