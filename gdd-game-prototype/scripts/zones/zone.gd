@@ -18,6 +18,7 @@ var current_zone_type: zoneType
 func _ready() -> void:
 	zone_ended_signal.connect(next_zone)
 	spawner_manager.wave_ended.connect(next_wave)
+	spawner_manager.set_zone_number(CURRENT_ZONE)
 	current_zone_type = get_random_zone_type()
 	manage_wave()
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 func next_zone() -> void:
 	CURRENT_ZONE += 1
 	current_zone.emit(CURRENT_ZONE)
+	spawner_manager.set_zone_number(CURRENT_ZONE)
 	CURRENT_WAVE = 1
 	current_wave.emit(CURRENT_WAVE)
 	if CURRENT_ZONE != 12:
@@ -32,7 +34,6 @@ func next_zone() -> void:
 		manage_wave()
 	else:
 		manage_boss()
-	pass
 
 
 func next_wave() -> void:

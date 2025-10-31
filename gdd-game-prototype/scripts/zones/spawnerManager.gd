@@ -26,6 +26,11 @@ func setup_spawn_positions() -> void:
 		spawn_positions.append(pos)
 
 
+var current_zone_number: int = 1
+
+func set_zone_number(zone_number: int) -> void:
+	current_zone_number = zone_number
+
 func spawn_Enemy(current_zone_type) -> void:
 	var Enemy_scene: PackedScene
 	var random_value = randf()
@@ -56,6 +61,10 @@ func spawn_Enemy(current_zone_type) -> void:
 	var enemy: Enemy = Enemy_scene.instantiate()
 	var spawn_pos = spawn_positions[randi() % spawn_positions.size()]
 	enemy.global_position = global_position + spawn_pos
+	
+	var multiplier = 1.0 + (current_zone_number - 1) * 0.2
+	enemy.multiplyStats(multiplier)
+	
 	enemy.Enemy_died.connect(EnemyCount)
 	get_tree().current_scene.call_deferred("add_child", enemy)
 	

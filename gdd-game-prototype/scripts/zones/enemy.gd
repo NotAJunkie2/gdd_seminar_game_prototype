@@ -1,11 +1,14 @@
 class_name Enemy extends CharacterBody2D
 
 signal Enemy_died
+signal health_changed(current_health: float, max_health: float)
+
 @export var player: Player
 
 var expScene: PackedScene = preload("res://scenes/Exp.tscn")
 
 @export var HEALTH: float
+@export var MAX_HEALTH: float
 @export var SPEED: float
 @export var DAMAGE: float
 @export var EXPVALUE: float
@@ -15,9 +18,12 @@ var expScene: PackedScene = preload("res://scenes/Exp.tscn")
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	hitbox.damaged.connect(on_damaged)
+	MAX_HEALTH = HEALTH
+	health_changed.emit(HEALTH, MAX_HEALTH)
 
 func take_damage(value: float) -> void:
 	HEALTH -= value
+	health_changed.emit(HEALTH, MAX_HEALTH)
 	if HEALTH <= 0:
 		var exp_drop: ExpDrop = expScene.instantiate()
 		exp_drop.EXPERIENCE_POINTS = EXPVALUE
@@ -27,6 +33,14 @@ func take_damage(value: float) -> void:
 		queue_free()
 
 
+func multiplyStats(value: float) -> void:
+	HEALTH = HEALTH * value
+	MAX_HEALTH = HEALTH
+	DAMAGE = DAMAGE * value
+	SPEED = SPEED * value
+	EXPVALUE = EXPVALUE * value
+
+
 func _on_body_entered(body: Node) -> void:
 	if body is Player:
 		if body.has_method("take_damage"):
@@ -34,5 +48,4 @@ func _on_body_entered(body: Node) -> void:
 
 
 func on_damaged(attack: Attack) -> void:
-	print("ATTACKED")
 	take_damage(attack.damage)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://fettkxs3eqts"]
 
-[ext_resource type="PackedScene" uid="uid://b8jo8ory42qt7" path="res://scenes/ennemies/ennemie.tscn" id="1_p6v4a"]
+[ext_resource type="PackedScene" uid="uid://b8jo8ory42qt7" path="res://scenes/ennemies/enemy.tscn" id="1_p6v4a"]
 [ext_resource type="Texture2D" uid="uid://c4rj3ov0kv525" path="res://assets/Port slime purple.png" id="2_pycic"]
-[ext_resource type="Script" uid="uid://viawtgfu08i7" path="res://scripts/zones/fastEnnemie.gd" id="2_w1svu"]
+[ext_resource type="Script" uid="uid://cv3vfcklq6uk7" path="res://scripts/zones/fastEnemy.gd" id="2_w1svu"]
 [ext_resource type="Script" uid="uid://cwtyvtwadux0w" path="res://scripts/components/hitbox.gd" id="4_o78jd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w1svu"]

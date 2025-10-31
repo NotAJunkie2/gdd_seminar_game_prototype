@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b6ybro72yiqsr" path="res://assets/15.png" id="3_bruh7"]
 [ext_resource type="Script" uid="uid://db03088rjpiph" path="res://scripts/state_machine/states/Move.gd" id="5_qu4a1"]
 [ext_resource type="Script" uid="uid://b61deo0lm2l6w" path="res://scenes/Weapon.gd" id="6_70d11"]
-[ext_resource type="PackedScene" uid="uid://ko7w6c30dxaf" path="res://scenes/ennemies/ennemie_hud.tscn" id="6_cw2d6"]
+[ext_resource type="PackedScene" path="res://scenes/ennemies/enemy_hud.tscn" id="9_bruh7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 14.0
@@ -118,7 +118,7 @@ shape = SubResource("CircleShape2D_70d11")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="EnemyHud" parent="Camera2D" instance=ExtResource("6_cw2d6")]
+[node name="EnemyHud" parent="Camera2D" instance=ExtResource("9_bruh7")]
 
 [connection signal="timeout" from="Weapon/Cooldown" to="Weapon" method="_on_cooldown_timeout"]
 [connection signal="area_entered" from="PickupMagnet" to="." method="_on_magnet_area_entered"]

@@ -1,15 +1,16 @@
-class_name FastEnemy extends Enemy
+class_name SlowEnemy extends Enemy
 
 
-@export var Health: float = 5.0
-@export var Speed: float = 150.0
-@export var Damage: float = 5.0
-@export var ExpValue: float = 30
+@export var Health: float = 20.0
+@export var Speed: float = 50.0
+@export var Damage: float = 15.0
+@export var ExpValue: float = 50
 
 
 func _ready() -> void:
 	super._ready()
 	HEALTH = Health
+	MAX_HEALTH = Health
 	SPEED = Speed
 	DAMAGE = Damage
 	EXPVALUE = ExpValue
