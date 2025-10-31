@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://r06pogts8mq1"]
+
+[ext_resource type="Texture2D" uid="uid://d2niiocprp0gd" path="res://assets/background.jpg" id="1_d1c63"]
+[ext_resource type="PackedScene" uid="uid://d0v6f1ikr2t1s" path="res://scenes/Player.tscn" id="1_kqs1s"]
+[ext_resource type="PackedScene" uid="uid://le0rcnvjmik7" path="res://scenes/Exp.tscn" id="2_32lhk"]
+[ext_resource type="PackedScene" uid="uid://bor4b2u8co588" path="res://scenes/Zone.tscn" id="3_7g83o"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d1c63"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lgw5"]
+size = Vector2(1915.1296, 68.72043)
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(563.00006, 339)
+scale = Vector2(2.2427015, 1.7112498)
+texture = ExtResource("1_d1c63")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(563.00006, 339)
+scale = Vector2(2.4327335, 1.85625)
+collision_mask = 129
+physics_material_override = SubResource("PhysicsMaterial_d1c63")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(941.739, 30.168365)
+rotation = 1.5707964
+scale = Vector2(0.9999985, 0.99999845)
+shape = SubResource("RectangleShape2D_1lgw5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-916.6643, -38.24916)
+rotation = 1.5707964
+scale = Vector2(0.9999995, 0.999999)
+shape = SubResource("RectangleShape2D_1lgw5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(15.620239, 432.054)
+scale = Vector2(0.99999976, 0.9999995)
+shape = SubResource("RectangleShape2D_1lgw5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7.8101177, -498.85516)
+scale = Vector2(0.9999999, 0.9999998)
+shape = SubResource("RectangleShape2D_1lgw5")
+
+[node name="Player" parent="." instance=ExtResource("1_kqs1s")]
+top_level = true
+
+[node name="Exp4" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(-89, 258.99997)
+rotation = 0.030413419
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Exp3" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(-149.55154, 549.68787)
+rotation = -3.126386
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Exp2" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(202.1659, 350.19043)
+rotation = 1.5783997
+
+[node name="Exp" parent="." instance=ExtResource("2_32lhk")]
+position = Vector2(174, 133)
+
+[node name="Zone" parent="." groups=["Zone"] instance=ExtResource("3_7g83o")]

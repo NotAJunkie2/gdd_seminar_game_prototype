@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d0v6f1ikr2t1s"]
+[gd_scene load_steps=21 format=3 uid="uid://drt173elba6gj"]
 
 [ext_resource type="Script" uid="uid://b4ppfp14eiqq6" path="res://scripts/player/Player.gd" id="1_3li8b"]
 [ext_resource type="Script" uid="uid://b6hwcxp17nnd" path="res://scripts/state_machine/StateMachine.gd" id="1_v6fml"]
@@ -120,6 +120,7 @@ shape = SubResource("CircleShape2D_70d11")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="EnemyHud" parent="Camera2D" instance=ExtResource("9_bruh7")]
+script = ExtResource("10_6eyey")
 
 [node name="ProgressBar" type="ProgressBar" parent="Camera2D/EnemyHud"]
 offset_left = 36.0

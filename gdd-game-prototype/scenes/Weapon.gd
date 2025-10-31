@@ -23,10 +23,19 @@ func shoot() -> void:
 		var spawned_bullet := BULLET_SCENE.instantiate()
 		var mouse_direction := get_global_mouse_position() - FIRING_POSITION.global_position
 		
+		#@export var speed: float = 450
+#@export var damage: float = 5
+#@export var max_pierce: int = 1
+		
 		get_tree().root.add_child(spawned_bullet)
 		spawned_bullet.spawn_position = FIRING_POSITION.global_position
 		spawned_bullet.global_position = FIRING_POSITION.global_position
 		spawned_bullet.rotation = mouse_direction.angle()
+		spawned_bullet.range *= PLAYER.RANGE
+		spawned_bullet.damage *= PLAYER.DAMAGE_MULTIPLIER
+
+		print("Bullet range: ", spawned_bullet.range)
+		print("Bullet damage: ", spawned_bullet.damage)
 
 		CAN_FIRE = false
 		FIRE_COOLDOWN_TIMER.start(FIRE_COOLDOWN / PLAYER.ATTACK_SPEED)

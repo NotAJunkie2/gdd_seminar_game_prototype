@@ -15,7 +15,6 @@ func _ready():
 	if hurtbox:
 		hurtbox.hit_enemy.connect(on_enemy_hit)
 
-
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
 	

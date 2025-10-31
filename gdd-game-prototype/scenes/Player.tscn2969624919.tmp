@@ -120,6 +120,7 @@ shape = SubResource("CircleShape2D_70d11")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="EnemyHud" parent="Camera2D" instance=ExtResource("9_bruh7")]
+script = ExtResource("10_6eyey")
 
 [node name="ProgressBar" type="ProgressBar" parent="Camera2D/EnemyHud"]
 offset_left = 36.0
