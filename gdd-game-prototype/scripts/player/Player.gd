@@ -2,6 +2,8 @@ class_name Player extends CharacterBody2D
 
 # PLAYER
 @export var MOVE_SPEED: float = 250
+@export var ACCELERATION: float = 1500.0
+@export var DECELERATION: float = 2000.0
 @export var MAX_HEALTH: int = 100
 @export var HEALTH: int = 100
 @export var SHIELD: int = 25

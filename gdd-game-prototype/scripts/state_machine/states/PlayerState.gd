@@ -20,7 +20,7 @@ func process_frame(_delta: float) -> void:
 
 func process_physics(_delta: float) -> void:
 	# Compute horizontal input
-	apply_movement(MOVEMENT_INPUT)
+	apply_movement(MOVEMENT_INPUT, _delta)
 
 # Converts 2D input vector to 3D world direction relative to player facing
 func get_movement_input() -> Vector2:
@@ -31,11 +31,11 @@ func get_movement_input() -> Vector2:
 	return move_input
 
 # Updates desired velocity based on player speed and input
-func apply_movement(direction: Vector2) -> void:
+func apply_movement(direction: Vector2, delta: float) -> void:
 	if direction == Vector2.ZERO:
-		PLAYER.velocity.x = 0.0
-		PLAYER.velocity.y = 0.0
+		# Apply deceleration when no input
+		PLAYER.velocity = PLAYER.velocity.move_toward(Vector2.ZERO, PLAYER.DECELERATION * delta)
 	else:
+		# Apply acceleration towards target velocity
 		var target_velocity: Vector2 = direction * PLAYER.MOVE_SPEED
-		PLAYER.velocity.x = target_velocity.x
-		PLAYER.velocity.y = target_velocity.y
+		PLAYER.velocity = PLAYER.velocity.move_toward(target_velocity, PLAYER.ACCELERATION * delta)

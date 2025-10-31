@@ -29,7 +29,7 @@ func shoot() -> void:
 		spawned_bullet.rotation = mouse_direction.angle()
 
 		CAN_FIRE = false
-		FIRE_COOLDOWN_TIMER.start(FIRE_COOLDOWN)
+		FIRE_COOLDOWN_TIMER.start(FIRE_COOLDOWN / PLAYER.ATTACK_SPEED)
 	
 	#for strategy in PLAYER.WEAPON_UPGRADES:
 		#strategy.apply_upgrade(spawned_bullet)

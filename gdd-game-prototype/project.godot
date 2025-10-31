@@ -62,3 +62,7 @@ primary_fire={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="PickupCollector"
 2d_physics/layer_4="Pickup"
+
+[rendering]
+
+textures/default_filters/use_nearest_mipmap_filter=true

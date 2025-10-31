@@ -16,6 +16,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	look_at(player.global_position)
+
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		

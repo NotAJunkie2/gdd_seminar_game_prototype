@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b8jo8ory42qt7" path="res://scenes/ennemies/ennemie.tscn" id="1_p8pg7"]
 [ext_resource type="Script" uid="uid://cpmxi8r8j4wcj" path="res://scripts/zones/defaultEnnemie.gd" id="2_8w510"]
-[ext_resource type="Texture2D" uid="uid://bqh7qs363rph2" path="res://assets/Port slime red.png" id="3_q6vup"]
+[ext_resource type="Texture2D" uid="uid://ckmf4fjh00avd" path="res://assets/Nairan - Bomber - Base.png" id="3_p8pg7"]
 [ext_resource type="Script" uid="uid://bh0xn3xsub347" path="res://scripts/components/health.gd" id="4_8kfjf"]
 [ext_resource type="Script" uid="uid://cwtyvtwadux0w" path="res://scripts/components/hitbox.gd" id="5_xyq58"]
 
@@ -13,15 +13,17 @@ radius = 26.0
 radius = 37.01351
 
 [node name="DefaultEnemy" groups=["ennemies"] instance=ExtResource("1_p8pg7")]
-collision_mask = 3
 motion_mode = 1
 script = ExtResource("2_8w510")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-texture = ExtResource("3_q6vup")
+rotation = 1.5707964
+scale = Vector2(1.8014936, 1.8014936)
+texture = ExtResource("3_p8pg7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 5)
+position = Vector2(1.1920929e-07, 0)
+rotation = -0.42591682
 shape = SubResource("CircleShape2D_75vcs")
 
 [node name="Health" type="Node" parent="." index="2"]

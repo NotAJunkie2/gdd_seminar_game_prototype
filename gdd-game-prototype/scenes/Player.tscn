@@ -1,29 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0v6f1ikr2t1s"]
+[gd_scene load_steps=19 format=3 uid="uid://d0v6f1ikr2t1s"]
 
 [ext_resource type="Script" uid="uid://b4ppfp14eiqq6" path="res://scripts/player/Player.gd" id="1_3li8b"]
 [ext_resource type="Script" uid="uid://b6hwcxp17nnd" path="res://scripts/state_machine/StateMachine.gd" id="1_v6fml"]
 [ext_resource type="Script" uid="uid://b1gbueiph48t1" path="res://scripts/state_machine/states/idle.gd" id="2_3li8b"]
+[ext_resource type="Texture2D" uid="uid://bqmin7sxdgpd3" path="res://assets/Main Ship - Base - Full health.png" id="2_khinc"]
 [ext_resource type="Script" uid="uid://kjsf5inboxk5" path="res://scripts/player/components/movement_component.gd" id="2_mdl7e"]
+[ext_resource type="Texture2D" uid="uid://b6ybro72yiqsr" path="res://assets/15.png" id="3_bruh7"]
 [ext_resource type="Script" uid="uid://db03088rjpiph" path="res://scripts/state_machine/states/Move.gd" id="5_qu4a1"]
-[ext_resource type="Script" path="res://scenes/Weapon.gd" id="6_70d11"]
+[ext_resource type="Script" uid="uid://b61deo0lm2l6w" path="res://scenes/Weapon.gd" id="6_70d11"]
 [ext_resource type="PackedScene" uid="uid://ko7w6c30dxaf" path="res://scenes/ennemies/ennemie_hud.tscn" id="6_cw2d6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
-
-[sub_resource type="Gradient" id="Gradient_mdl7e"]
-offsets = PackedFloat32Array(0.8333333, 1)
-colors = PackedColorArray(0, 1, 1, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qu4a1"]
-gradient = SubResource("Gradient_mdl7e")
-fill = 2
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qu4a1"]
-radius = 81.02469
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_70d11"]
-radius = 50.039986
+radius = 14.0
 
 [sub_resource type="PrismMesh" id="PrismMesh_qu4a1"]
 
@@ -33,14 +21,69 @@ colors = PackedColorArray(0.5875964, 0.21628591, 0.36392477, 1, 1, 0.3019608, 1,
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cw2d6"]
 gradient = SubResource("Gradient_70d11")
 
+[sub_resource type="Curve" id="Curve_bruh7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3070866, 1), 0.0, 0.0, 0, 0, Vector2(0.7677165, 0.47004992), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_6eyey"]
+curve = SubResource("Curve_bruh7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6eyey"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-31.295, 0, 0)
+gravity = Vector3(-24.605, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.099999994
+color = Color(1, 0.3647059, 0.70980394, 1)
+alpha_curve = SubResource("CurveTexture_6eyey")
+hue_variation_min = -0.07000002
+hue_variation_max = 0.26999998
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qu4a1"]
+radius = 81.02469
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70d11"]
+radius = 50.039986
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_3li8b")
+ACCELERATION = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5q5h1")
 
+[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("FIRING_POSITION")]
+position = Vector2(22, 0)
+script = ExtResource("6_70d11")
+FIRING_POSITION = NodePath("MeshInstance2D/Marker2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Weapon"]
+rotation = -1.5707964
+scale = Vector2(15.636483, 15.636483)
+mesh = SubResource("PrismMesh_qu4a1")
+texture = SubResource("GradientTexture2D_cw2d6")
+
+[node name="Marker2D" type="Marker2D" parent="Weapon/MeshInstance2D"]
+position = Vector2(-1.9568319e-08, 0.447671)
+rotation = 1.5707964
+scale = Vector2(0.063953, 0.063953)
+
+[node name="Cooldown" type="Timer" parent="Weapon"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 4
+texture = ExtResource("3_bruh7")
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_6eyey")
+
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_qu4a1")
+texture_filter = 1
+rotation = 1.5707964
+scale = Vector2(1.7170416, 1.7170416)
+texture = ExtResource("2_khinc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -58,6 +101,7 @@ script = ExtResource("2_3li8b")
 script = ExtResource("5_qu4a1")
 
 [node name="PickupMagnet" type="Area2D" parent="."]
+visible = false
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupMagnet"]
@@ -65,6 +109,7 @@ shape = SubResource("CircleShape2D_qu4a1")
 debug_color = Color(0.9358968, 1.915604e-05, 0.6365744, 0.41960785)
 
 [node name="PickupZone" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 8
 
@@ -75,26 +120,7 @@ shape = SubResource("CircleShape2D_70d11")
 
 [node name="EnemyHud" parent="Camera2D" instance=ExtResource("6_cw2d6")]
 
-[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("FIRING_POSITION")]
-position = Vector2(28, -12)
-script = ExtResource("6_70d11")
-FIRING_POSITION = NodePath("Marker2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Weapon"]
-position = Vector2(-7.000002, 41.000004)
-rotation = -1.5707964
-scale = Vector2(30, 30)
-mesh = SubResource("PrismMesh_qu4a1")
-texture = SubResource("GradientTexture2D_cw2d6")
-
-[node name="Marker2D" type="Marker2D" parent="Weapon"]
-position = Vector2(6, 41)
-
-[node name="Cooldown" type="Timer" parent="Weapon"]
-
+[connection signal="timeout" from="Weapon/Cooldown" to="Weapon" method="_on_cooldown_timeout"]
 [connection signal="area_entered" from="PickupMagnet" to="." method="_on_magnet_area_entered"]
 [connection signal="area_entered" from="PickupZone" to="." method="_on_pickup_area_entered"]
 [connection signal="body_entered" from="PickupZone" to="." method="_on_pickup_body_entered"]
-[connection signal="timeout" from="Weapon/Cooldown" to="Weapon" method="_on_cooldown_timeout"]
