@@ -16,7 +16,9 @@ func _ready() -> void:
 	EXPVALUE = ExpValue
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)  # Appeler le système de dégâts de la classe parente
+	
 	look_at(player.global_position)
 
 	if player:

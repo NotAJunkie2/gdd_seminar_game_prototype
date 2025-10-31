@@ -111,7 +111,11 @@ func manage_wave() -> void:
 	var enemies_to_spawn = CURRENT_WAVE * 10
 	for i in range(enemies_to_spawn):
 		spawner_manager.spawn_Enemy(current_zone_type)
+	
+	# Attendre que tous les ennemis soient spawned avant de marquer la wave comme "terminée"
+	await get_tree().process_frame
 	spawner_manager.isWaveEnded = true
+	print("Wave ", CURRENT_WAVE, " spawning complete. Enemies to kill: ", enemies_to_spawn)
 	
 	# Spawn des coffres aléatoires sur la map (sauf à la dernière vague)
 	if CURRENT_WAVE < 5 and random_chest_spawner:

@@ -108,7 +108,9 @@ func EnemyCount() -> void:
 	if EnemyCounter < 0:
 		EnemyCounter = 0
 	nb_of_enemies.emit(EnemyCounter)
+	print("Enemy died. Remaining: ", EnemyCounter, " | Wave ended flag: ", isWaveEnded)
 	if isWaveEnded and EnemyCounter <= 0:
+		print("=== WAVE COMPLETED ===")
 		wave_ended.emit()
 
 
