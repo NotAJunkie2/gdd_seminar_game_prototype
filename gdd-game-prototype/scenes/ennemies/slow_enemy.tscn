@@ -14,6 +14,15 @@ radius = 37.01351
 [node name="SlowEnemy" instance=ExtResource("1_rovlx")]
 collision_mask = 131
 script = ExtResource("2_hb7rv")
+Health = null
+Speed = null
+Damage = null
+ExpValue = null
+HEALTH = null
+MAX_HEALTH = null
+SPEED = null
+DAMAGE = null
+EXPVALUE = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 scale = Vector2(1.1, 1.1)

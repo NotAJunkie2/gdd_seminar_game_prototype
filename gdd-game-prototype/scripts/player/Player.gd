@@ -12,7 +12,7 @@ class_name Player extends CharacterBody2D
 @export var RANGE: float = 1.0
 @export var PROJECTILE_COUNT: int = 1
 @export var CRITICAL_CHANCE: float = 0.0
-@export var CRITICAL_DAMAGE: float = 1.0
+@export var CRITICAL_DAMAGE: float = 1.15
 @export var ATTACK_SPEED: float = 1.0
 # EXP PICKUP RANGE
 @export var PICKUP_RANGE: float = 1.0
@@ -161,3 +161,4 @@ func modify_stat(stat_name: String, value: float, is_percentage: bool = false) -
 			pickup_magnet.scale *= PICKUP_RANGE
 
 	print("Stat ", stat_name, " changed from ", old_value, " to ", new_value)
+	stat_changed.emit(stat_name, old_value, new_value)

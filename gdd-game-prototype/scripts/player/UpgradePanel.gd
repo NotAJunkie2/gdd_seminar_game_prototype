@@ -11,7 +11,7 @@ var current_offers: Array[UpgradeData] = []
 func _ready() -> void:
 	# Initially hidden
 	hide()
-
+	
 	# Set process mode to work when paused
 	process_mode = Node.PROCESS_MODE_ALWAYS
 

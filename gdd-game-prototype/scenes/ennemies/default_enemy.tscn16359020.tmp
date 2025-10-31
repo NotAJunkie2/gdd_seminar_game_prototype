@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dr4ifs22odkdk"]
+
+[ext_resource type="PackedScene" uid="uid://b8jo8ory42qt7" path="res://scenes/ennemies/enemy.tscn" id="1_p8pg7"]
+[ext_resource type="Script" uid="uid://cmv6j8imc6oa6" path="res://scripts/zones/defaultEnemy.gd" id="2_8w510"]
+[ext_resource type="Texture2D" uid="uid://ckmf4fjh00avd" path="res://assets/Nairan - Bomber - Base.png" id="3_p8pg7"]
+[ext_resource type="Script" uid="uid://bh0xn3xsub347" path="res://scripts/components/health.gd" id="4_8kfjf"]
+[ext_resource type="Script" uid="uid://cwtyvtwadux0w" path="res://scripts/components/hitbox.gd" id="5_xyq58"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75vcs"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_skqv4"]
+radius = 37.01351
+
+[node name="DefaultEnemy" groups=["ennemies"] instance=ExtResource("1_p8pg7")]
+motion_mode = 1
+script = ExtResource("2_8w510")
+Health = null
+Speed = null
+Damage = null
+ExpValue = null
+HEALTH = null
+MAX_HEALTH = null
+SPEED = null
+DAMAGE = null
+EXPVALUE = null
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+rotation = 1.5707964
+scale = Vector2(1.8014936, 1.8014936)
+texture = ExtResource("3_p8pg7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(1.1920929e-07, 0)
+rotation = -0.42591682
+shape = SubResource("CircleShape2D_75vcs")
+
+[node name="Health" type="Node" parent="." index="2"]
+script = ExtResource("4_8kfjf")
+metadata/_custom_type_script = "uid://bh0xn3xsub347"
+
+[node name="Hitbox" type="Area2D" parent="." index="3"]
+collision_layer = 2
+collision_mask = 129
+script = ExtResource("5_xyq58")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_skqv4")

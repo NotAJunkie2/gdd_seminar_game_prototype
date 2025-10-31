@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://fettkxs3eqts"]
+
+[ext_resource type="PackedScene" uid="uid://b8jo8ory42qt7" path="res://scenes/ennemies/enemy.tscn" id="1_p6v4a"]
+[ext_resource type="Texture2D" uid="uid://c4rj3ov0kv525" path="res://assets/Port slime purple.png" id="2_pycic"]
+[ext_resource type="Script" uid="uid://cv3vfcklq6uk7" path="res://scripts/zones/fastEnemy.gd" id="2_w1svu"]
+[ext_resource type="Script" uid="uid://cwtyvtwadux0w" path="res://scripts/components/hitbox.gd" id="4_o78jd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w1svu"]
+radius = 35.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nggt2"]
+radius = 37.01351
+
+[node name="fastEnemy" instance=ExtResource("1_p6v4a")]
+script = ExtResource("2_w1svu")
+Health = null
+Speed = null
+Damage = null
+ExpValue = null
+HEALTH = null
+MAX_HEALTH = null
+SPEED = null
+DAMAGE = null
+EXPVALUE = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_w1svu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_pycic")
+
+[node name="Hitbox" type="Area2D" parent="." index="2"]
+collision_layer = 2
+collision_mask = 129
+script = ExtResource("4_o78jd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_nggt2")
