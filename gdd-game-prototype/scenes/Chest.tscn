@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqv4xw5r8p7yi"]
+
+[ext_resource type="Script" path="res://scripts/zones/Chest.gd" id="1_chest"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chest"]
+size = Vector2(60, 60)
+
+[node name="Chest" type="Area2D" groups=["Chest"]]
+collision_layer = 16
+collision_mask = 1
+script = ExtResource("1_chest")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.8, 0.6, 0.2, 1)
+
+[node name="ChestBody" type="ColorRect" parent="Sprite2D"]
+offset_left = -25.0
+offset_top = -20.0
+offset_right = 25.0
+offset_bottom = 20.0
+color = Color(0.6, 0.4, 0.1, 1)
+
+[node name="ChestLid" type="ColorRect" parent="Sprite2D"]
+offset_left = -25.0
+offset_top = -30.0
+offset_right = 25.0
+offset_bottom = -20.0
+color = Color(0.7, 0.5, 0.2, 1)
+
+[node name="Lock" type="ColorRect" parent="Sprite2D"]
+offset_left = -5.0
+offset_top = -10.0
+offset_right = 5.0
+color = Color(1, 0.8, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_chest")

@@ -1,8 +1,10 @@
 extends CanvasLayer
 
-@onready var zone_label: RichTextLabel = $HBoxContainer/ZoneLabel
-@onready var wave_label: RichTextLabel = $HBoxContainer/WaveLabel
-@onready var enemies_counter_label: RichTextLabel = $HBoxContainer/EnemiesCounterLabel
+@onready var zone_panel: PanelContainer = $Control/TopRight/ZonePanel
+@onready var zone_label: Label = $Control/TopRight/ZonePanel/VBoxContainer/ZoneValue
+@onready var wave_label: Label = $Control/TopRight/ZonePanel/VBoxContainer/WaveValue
+@onready var enemies_panel: PanelContainer = $Control/TopRight/EnemiesPanel
+@onready var enemies_label: Label = $Control/TopRight/EnemiesPanel/VBoxContainer/EnemiesValue
 
 
 var zone_node: Zone
@@ -10,20 +12,44 @@ var zone_node: Zone
 
 func _ready() -> void:
 	layer = 100
-	setup_label_style(zone_label)
-	setup_label_style(enemies_counter_label)
-	setup_label_style(wave_label)
-	
+	setup_hud_style()
 	call_deferred("_setup_connections")
 
 
-func setup_label_style(label: RichTextLabel) -> void:
+func setup_hud_style() -> void:
+	if zone_panel:
+		var style = StyleBoxFlat.new()
+		style.bg_color = Color(0.1, 0.1, 0.15, 0.85)
+		style.set_corner_radius_all(8)
+		style.border_width_left = 2
+		style.border_width_top = 2
+		style.border_width_right = 2
+		style.border_width_bottom = 2
+		style.border_color = Color(0.3, 0.5, 0.8, 0.8)
+		zone_panel.add_theme_stylebox_override("panel", style)
+	
+	if enemies_panel:
+		var style = StyleBoxFlat.new()
+		style.bg_color = Color(0.15, 0.1, 0.1, 0.85)
+		style.set_corner_radius_all(8)
+		style.border_width_left = 2
+		style.border_width_top = 2
+		style.border_width_right = 2
+		style.border_width_bottom = 2
+		style.border_color = Color(0.8, 0.3, 0.3, 0.8)
+		enemies_panel.add_theme_stylebox_override("panel", style)
+	
+	setup_label_style(zone_label)
+	setup_label_style(wave_label)
+	setup_label_style(enemies_label)
+
+
+func setup_label_style(label: Label) -> void:
 	if label:
-		label.bbcode_enabled = true
-		label.add_theme_color_override("default_color", Color.WHITE)
+		label.add_theme_color_override("font_color", Color.WHITE)
 		label.add_theme_constant_override("outline_size", 2)
 		label.add_theme_color_override("font_outline_color", Color.BLACK)
-		label.add_theme_font_size_override("normal_font_size", 20)
+		label.add_theme_font_size_override("font_size", 24)
 
 
 func _setup_connections() -> void:
@@ -44,24 +70,28 @@ func _setup_connections() -> void:
 		_on_wave_changed(zone_node.CURRENT_WAVE)
 	else:
 		print("HUD: Zone node not found!")
-		zone_label.text = "Zone: ERROR"
-		wave_label.text = "Wave: ERROR"
-		enemies_counter_label.text = "Enemies: ERROR"
+		zone_label.text = "ERROR"
+		wave_label.text = "ERROR"
+		enemies_label.text = "ERROR"
 
 
 func _on_zone_changed(zone_number: int) -> void:
 	if zone_label:
-		zone_label.text = "Zone: " + str(zone_number)
-		print("HUD: Zone changed to ", zone_number)
+		zone_label.text = str(zone_number)
 
 
 func _on_wave_changed(wave_number: int) -> void:
 	if wave_label:
-		wave_label.text = "Wave: " + str(wave_number)
-		print("HUD: Wave changed to ", wave_number)
+		wave_label.text = str(wave_number) + " / 5"
 
 
 func _on_enemies_count_changed(count: int) -> void:
-	if enemies_counter_label:
-		enemies_counter_label.text = "Enemies: " + str(count)
-		print("HUD: Enemy count changed to ", count)
+	if enemies_label:
+		enemies_label.text = str(count)
+		
+		var color = Color.WHITE
+		if count > 20:
+			color = Color(1.0, 0.3, 0.3)
+		elif count > 10:
+			color = Color(1.0, 0.7, 0.3)
+		enemies_label.add_theme_color_override("font_color", color)

@@ -20,6 +20,7 @@ texture = ExtResource("1_d1c63")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(563.00006, 339)
 scale = Vector2(2.4327335, 1.85625)
+collision_layer = 64
 collision_mask = 129
 physics_material_override = SubResource("PhysicsMaterial_d1c63")
 

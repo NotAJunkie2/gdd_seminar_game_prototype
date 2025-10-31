@@ -1,31 +1,83 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnlmk082xx6qk"]
 
-[ext_resource type="Script" uid="uid://dxnqfgihexqkl" path="res://scripts/zones/ennemieHUD.gd" id="1_d2vh2"]
+[ext_resource type="Script" uid="uid://c1vf1114cjufj" path="res://scripts/zones/enemyHUD.gd" id="1_kmnll"]
 
 [node name="EnemyHud" type="CanvasLayer"]
-script = ExtResource("1_d2vh2")
+script = ExtResource("1_kmnll")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 15
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 16
-alignment = 1
+offset_left = -40.0
+offset_right = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
 
-[node name="ZoneLabel" type="RichTextLabel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Zone:"
+[node name="TopRight" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 239.0
+grow_horizontal = 0
+theme_override_constants/separation = 15
 
-[node name="WaveLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="ZonePanel" type="PanelContainer" parent="Control/TopRight"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "wave: 
-"
+size_flags_horizontal = 4
 
-[node name="EnemiesCounterLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TopRight/ZonePanel"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Enemies: "
+theme_override_constants/separation = 5
+
+[node name="ZoneTitle" type="Label" parent="Control/TopRight/ZonePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "ZONE"
+horizontal_alignment = 1
+
+[node name="ZoneValue" type="Label" parent="Control/TopRight/ZonePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "1"
+horizontal_alignment = 1
+
+[node name="WaveTitle" type="Label" parent="Control/TopRight/ZonePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "WAVE"
+horizontal_alignment = 1
+
+[node name="WaveValue" type="Label" parent="Control/TopRight/ZonePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "1 / 5"
+horizontal_alignment = 1
+
+[node name="EnemiesPanel" type="PanelContainer" parent="Control/TopRight"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TopRight/EnemiesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="EnemiesTitle" type="Label" parent="Control/TopRight/EnemiesPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "ENEMIES"
+horizontal_alignment = 1
+
+[node name="EnemiesValue" type="Label" parent="Control/TopRight/EnemiesPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
