@@ -1,4 +1,4 @@
-class_name SlowEnemy extends Enemy
+class_name SEnemy extends Enemy
 
 
 @export var Health: float = 20.0

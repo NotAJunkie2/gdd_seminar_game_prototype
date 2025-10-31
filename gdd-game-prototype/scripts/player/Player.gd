@@ -26,10 +26,15 @@ class_name Player extends CharacterBody2D
 
 @export var aim_position: Vector2 = Vector2(1, 0)
 @onready var pickup_magnet: Area2D = $PickupMagnet
+@onready var sprite: Sprite2D = $Sprite
+@onready var death_screen: Control = $Camera2D/EnemyHud/DeathScreen
+
+var is_dead: bool = false
 
 signal xp_changed
 signal level_up
 signal stat_changed(stat_name: String, old_value: Variant, new_value: Variant)
+signal player_died
 
 func _init() -> void:
 	pass
@@ -65,13 +70,60 @@ func _on_magnet_area_entered(area: Area2D) -> void:
 
 
 func take_damage(value: float) -> void:
+	if is_dead:
+		return
+		
 	var old_health = HEALTH
 	HEALTH -= int(value)
 	stat_changed.emit("HEALTH", old_health, HEALTH)
 	
 	if HEALTH <= 0:
-		print("death")
-	pass
+		die()
+
+func die() -> void:
+	if is_dead:
+		return
+	
+	is_dead = true
+	print("Player died!")
+	
+	# Disable movement and collisions
+	set_physics_process(false)
+	collision_layer = 0
+	collision_mask = 0
+	
+	# Play death animation
+	play_death_animation()
+	
+	# Wait for animation to complete
+	await get_tree().create_timer(1.5).timeout
+	
+	# Pause the game
+	get_tree().paused = true
+	
+	# Show death screen
+	if death_screen and death_screen.has_method("show_death_screen"):
+		death_screen.show_death_screen()
+	
+	# Emit signal
+	player_died.emit()
+
+func play_death_animation() -> void:
+	if not sprite:
+		return
+	
+	var tween = create_tween()
+	tween.set_parallel(true)
+	
+	# Fade out
+	tween.tween_property(sprite, "modulate:a", 0.0, 1.0).set_trans(Tween.TRANS_CUBIC)
+	
+	# Rotate and scale down
+	tween.tween_property(sprite, "rotation", TAU * 2, 1.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(sprite, "scale", Vector2(0.2, 0.2), 1.0).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	
+	# Move down slightly
+	tween.tween_property(self, "position:y", position.y + 50, 1.0).set_trans(Tween.TRANS_QUAD)
 
 func addXP(xp: float) -> void:
 	CURRENT_XP += xp

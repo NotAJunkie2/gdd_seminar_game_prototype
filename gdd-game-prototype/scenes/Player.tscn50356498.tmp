@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d0v6f1ikr2t1s"]
+[gd_scene load_steps=22 format=3 uid="uid://d0v6f1ikr2t1s"]
 
 [ext_resource type="Script" uid="uid://b4ppfp14eiqq6" path="res://scripts/player/Player.gd" id="1_3li8b"]
 [ext_resource type="Script" uid="uid://b6hwcxp17nnd" path="res://scripts/state_machine/StateMachine.gd" id="1_v6fml"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://bnnvi24v0pb2x" path="res://scripts/player/XPbar.gd" id="10_6eyey"]
 [ext_resource type="Script" uid="uid://dpwaxmjk3qh8s" path="res://scripts/player/HealthBar.gd" id="10_health"]
 [ext_resource type="Script" uid="uid://cnrpvt0ghxdl6" path="res://scripts/player/UpgradePanel.gd" id="11_d3wef"]
-[ext_resource type="Script" uid="uid://47qx0fv6621f" path="res://scripts/player/DeathScreen.gd" id="13_lkdrv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 14.0
@@ -123,6 +122,16 @@ shape = SubResource("CircleShape2D_70d11")
 
 [node name="EnemyHud" parent="Camera2D" instance=ExtResource("9_bruh7")]
 
+[node name="XPBar" type="ProgressBar" parent="Camera2D/EnemyHud"]
+offset_left = 36.0
+offset_top = 608.0
+offset_right = 1111.0
+offset_bottom = 635.0
+min_value = 6.86
+value = 6.86
+show_percentage = false
+script = ExtResource("10_6eyey")
+
 [node name="HealthBarContainer" type="PanelContainer" parent="Camera2D/EnemyHud"]
 offset_left = 36.0
 offset_top = 36.0
@@ -185,59 +194,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "UPGRADE 1"
-
-[node name="DeathScreen" type="Control" parent="Camera2D/EnemyHud"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_lkdrv")
-
-[node name="ColorRect" type="ColorRect" parent="Camera2D/EnemyHud/DeathScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.10317612, 0.10317612, 0.10317612, 0.7294118)
-
-[node name="GridContainer" type="GridContainer" parent="Camera2D/EnemyHud/DeathScreen"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -15.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/EnemyHud/DeathScreen/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "You died!"
-fit_content = true
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="Camera2D/EnemyHud/DeathScreen/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-text = "Restart"
-
-[node name="XPBar" type="ProgressBar" parent="Camera2D/EnemyHud"]
-offset_left = 36.0
-offset_top = 608.0
-offset_right = 1111.0
-offset_bottom = 635.0
-min_value = 6.86
-value = 6.86
-show_percentage = false
-script = ExtResource("10_6eyey")
 
 [connection signal="timeout" from="Weapon/Cooldown" to="Weapon" method="_on_cooldown_timeout"]
 [connection signal="area_entered" from="PickupMagnet" to="." method="_on_magnet_area_entered"]

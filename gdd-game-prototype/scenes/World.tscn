@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://r06pogts8mq1"]
+[gd_scene load_steps=6 format=3 uid="uid://r06pogts8mq1"]
 
 [ext_resource type="PackedScene" uid="uid://d0v6f1ikr2t1s" path="res://scenes/Player.tscn" id="1_kqs1s"]
-[ext_resource type="Script" path="res://scripts/world/BackgroundStars.gd" id="1_stars"]
-[ext_resource type="PackedScene" uid="uid://le0rcnvjmik7" path="res://scenes/Exp.tscn" id="2_32lhk"]
+[ext_resource type="Script" uid="uid://cx8yw3jlaqm2p" path="res://scripts/world/BackgroundStars.gd" id="1_stars"]
 [ext_resource type="PackedScene" uid="uid://bor4b2u8co588" path="res://scenes/Zone.tscn" id="3_7g83o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d1c63"]
@@ -62,22 +61,5 @@ shape = SubResource("RectangleShape2D_1lgw5")
 
 [node name="Player" parent="." instance=ExtResource("1_kqs1s")]
 top_level = true
-
-[node name="Exp4" parent="." instance=ExtResource("2_32lhk")]
-position = Vector2(-89, 258.99997)
-rotation = 0.030413419
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="Exp3" parent="." instance=ExtResource("2_32lhk")]
-position = Vector2(-149.55154, 549.68787)
-rotation = -3.126386
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="Exp2" parent="." instance=ExtResource("2_32lhk")]
-position = Vector2(202.1659, 350.19043)
-rotation = 1.5783997
-
-[node name="Exp" parent="." instance=ExtResource("2_32lhk")]
-position = Vector2(174, 133)
 
 [node name="Zone" parent="." groups=["Zone"] instance=ExtResource("3_7g83o")]

@@ -95,60 +95,35 @@ func on_damaged(attack: Attack) -> void:
 
 
 func juice_damage() -> void:
-	# Flash rouge et shake
-	var sprite = get_node_or_null("Sprite2D")
-	if not sprite:
-		return
-	
-	# Flash rouge
 	var tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(sprite, "modulate", Color(2.0, 0.3, 0.3), 0.1)
-	tween.tween_property(sprite, "scale", Vector2(1.15, 1.15), 0.1).set_trans(Tween.TRANS_ELASTIC)
 	
-	tween.chain().set_parallel(true)
-	tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
-	tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_ELASTIC)
+	modulate = Color(2.0, 0.3, 0.3)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
+	
+	var original_scale = scale
+	tween.tween_property(self, "scale", original_scale * 1.3, 0.08).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", original_scale * 0.9, 0.08).set_delay(0.08).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "scale", original_scale, 0.08).set_delay(0.16).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	
+	for i in range(3):
+		var shake_offset = Vector2(randf_range(-8, 8), randf_range(-8, 8))
+		var original_pos = position
+		tween.tween_property(self, "position", original_pos + shake_offset, 0.03).set_delay(i * 0.03)
+		tween.tween_property(self, "position", original_pos, 0.03).set_delay(i * 0.03 + 0.03)
+	
+	tween.tween_property(self, "rotation", rotation + randf_range(-0.3, 0.3), 0.1)
+	tween.tween_property(self, "rotation", rotation, 0.1).set_delay(0.1)
 
 
 func juice_death() -> void:
-	# Animation de mort
-	var sprite = get_node_or_null("Sprite2D")
-	if not sprite:
-		return
-	
-	# Désactiver les collisions
-	collision_layer = 0
-	collision_mask = 0
-	if hitbox:
-		hitbox.collision_layer = 0
-		hitbox.collision_mask = 0
-	
-	# Animation d'explosion
+
 	var tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(sprite, "scale", Vector2(1.5, 1.5), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_property(sprite, "modulate:a", 0.0, 0.3)
-	tween.tween_property(sprite, "rotation", TAU, 0.4)
 	
-	# Particules
-	create_explosion_effect()
-
-
-func create_explosion_effect() -> void:
-	var particle_count = 8
-	for i in range(particle_count):
-		var particle = ColorRect.new()
-		particle.size = Vector2(4, 4)
-		particle.color = Color(1.0, 0.5, 0.2)
-		particle.position = global_position
-		get_tree().current_scene.add_child(particle)
-		
-		var angle = (TAU / particle_count) * i
-		var direction = Vector2(cos(angle), sin(angle))
-		var distance = randf_range(30, 60)
-		
-		var tween = create_tween()
-		tween.tween_property(particle, "position", global_position + direction * distance, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tween.parallel().tween_property(particle, "modulate:a", 0.0, 0.4)
-		tween.tween_callback(particle.queue_free)
+	modulate = Color(1.5, 0.5, 0.2)
+	tween.tween_property(self, "modulate", Color(2.0, 2.0, 2.0, 0.0), 0.4).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	
+	tween.tween_property(self, "scale", scale * 1.2, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	
+	tween.tween_property(self, "rotation", rotation + TAU * 2, 0.4).set_trans(Tween.TRANS_CUBIC)
