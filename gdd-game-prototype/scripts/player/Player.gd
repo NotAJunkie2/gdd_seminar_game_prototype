@@ -65,7 +65,10 @@ func _on_magnet_area_entered(area: Area2D) -> void:
 
 
 func take_damage(value: float) -> void:
-	HEALTH -= value
+	var old_health = HEALTH
+	HEALTH -= int(value)
+	stat_changed.emit("HEALTH", old_health, HEALTH)
+	
 	if HEALTH <= 0:
 		print("death")
 	pass

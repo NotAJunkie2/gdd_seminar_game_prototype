@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://r06pogts8mq1"]
 
-[ext_resource type="Texture2D" uid="uid://d2niiocprp0gd" path="res://assets/background.jpg" id="1_d1c63"]
 [ext_resource type="PackedScene" uid="uid://d0v6f1ikr2t1s" path="res://scenes/Player.tscn" id="1_kqs1s"]
+[ext_resource type="Script" path="res://scripts/world/BackgroundStars.gd" id="1_stars"]
 [ext_resource type="PackedScene" uid="uid://le0rcnvjmik7" path="res://scenes/Exp.tscn" id="2_32lhk"]
 [ext_resource type="PackedScene" uid="uid://bor4b2u8co588" path="res://scenes/Zone.tscn" id="3_7g83o"]
 
@@ -12,10 +12,24 @@ size = Vector2(1915.1296, 68.72043)
 
 [node name="World" type="Node2D"]
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(563.00006, 339)
-scale = Vector2(2.2427015, 1.7112498)
-texture = ExtResource("1_d1c63")
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Background" type="ColorRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.1, 0.25, 1)
+
+[node name="Stars" type="Node2D" parent="."]
+z_index = -50
+script = ExtResource("1_stars")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(563.00006, 339)

@@ -1,5 +1,7 @@
 extends Control
 
+signal upgrade_chosen
+
 @onready var player: Player = $"../../.."
 @onready var upg_1_button: Button = $GridContainer/UPG_1
 @onready var upg_2_button: Button = $GridContainer/UPG_2
@@ -163,8 +165,11 @@ func _on_upgrade_selected(index: int) -> void:
 		# Hide panel
 		hide()
 
-		# Unpause game
-		get_tree().paused = false
-
 		# Clear offers
 		current_offers.clear()
+		
+		# Unpause game
+		get_tree().paused = false
+		
+		# Emit signal for chest system
+		upgrade_chosen.emit()

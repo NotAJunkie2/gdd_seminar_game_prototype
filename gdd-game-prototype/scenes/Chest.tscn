@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/zones/Chest.gd" id="1_chest"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chest"]
-size = Vector2(60, 60)
+size = Vector2(80, 80)
 
 [node name="Chest" type="Area2D" groups=["Chest"]]
 collision_layer = 16

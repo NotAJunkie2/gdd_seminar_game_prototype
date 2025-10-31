@@ -18,6 +18,7 @@ var expScene: PackedScene = preload("res://scenes/Exp.tscn")
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	hitbox.damaged.connect(on_damaged)
+	hitbox.body_entered.connect(_on_body_entered)
 	MAX_HEALTH = HEALTH
 	health_changed.emit(HEALTH, MAX_HEALTH)
 
@@ -42,7 +43,9 @@ func multiplyStats(value: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
+	print("Enemy collision with: ", body.name, " (is Player: ", body is Player, ")")
 	if body is Player:
+		print("Dealing ", DAMAGE, " damage to player!")
 		if body.has_method("take_damage"):
 			body.take_damage(DAMAGE)
 
